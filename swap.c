@@ -2,13 +2,13 @@
 
 /**
  * swap - swaps numbers in array
- * @x: number
- * @x: number
+ * @xp: number
+ * @yp: number
  * Return: Nothing
  */
-void swap(int* xp, int* yp)
+void swap(int *xp, int *yp)
 {
-	int temp = xp;
-	xp = yp;
-	yp = temp;
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
 }

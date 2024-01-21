@@ -1,5 +1,10 @@
 #include "sort.h"
 
+void _quick_sort(int *array, int low, int high, size_t size);
+int partition(int *array, int low, int high, size_t size);
+void swap(int *a, int *b);
+void quick_sort(int *array, size_t size);
+
 /**
  * quick_sort - sorts array of integers using the quick sort algorithm
  * @array: array of integers

@@ -35,4 +35,7 @@ void swap(int *a, int *b);
 void shell_sort(int *array, size_t size);
 void swap_shell(int *xp, int *yp);
 
+void counting_sort(int *array, size_t size);
+int key(int *array, size_t size);
+
 #endif

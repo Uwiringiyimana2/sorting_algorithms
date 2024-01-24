@@ -31,8 +31,8 @@ void _merge_sort(int *array, size_t lower, size_t higher)
 	if (lower < higher)
 	{
 		mid = (lower + higher) / 2;
-		_merge_sort(array, lower, mid - 1);
-		_merge_sort(array, mid, higher);
+		_merge_sort(array, lower, mid);
+		_merge_sort(array, mid + 1, higher);
 		merge(array, lower, mid, higher);
 	}
 }
@@ -48,49 +48,61 @@ void _merge_sort(int *array, size_t lower, size_t higher)
 void merge(int *array, size_t lower, size_t mid, size_t higher)
 {
 	size_t i, j, k;
-	int *sorted;
+	size_t n1 = mid - lower + 1;
+	size_t n2 = higher - mid;
 
-	i = k = lower;
-	j = mid;
+	int *left, *right;
 
-	sorted = malloc((higher + 1) * sizeof(int));
-	if (sorted == NULL)
-	{
-		free(sorted);
+	left = malloc(n1 * sizeof(int));
+	right = malloc(n2 * sizeof(int));
+	if (left == NULL)
 		return;
-	}
+	if (right == NULL)
+		return;
 
-	while (i < mid && j <= higher)
+	for (i = 0; i < n1; i++)
+		left[i] = array[lower + i];
+	for (j = 0; j < n2; j++)
+		right[j] = array[mid + 1 + j];
+
+	printf("merging...\n[left]: ");
+	print_array(left, mid - lower);
+
+	printf("[right]: ");
+	print_array(right, higher - mid);
+
+	i = j = 0;
+	k = lower;
+
+	while (i < n1 && j < n2)
 	{
-		if (array[i] <= array[j])
+		if (left[i] <= right[j])
 		{
-			sorted[k] = array[i];
+			array[k] = left[i];
 			i++;
 		}
 		else
 		{
-			sorted[k] = array[j];
+			array[k] = right[j];
 			j++;
 		}
 		k++;
 	}
-	if (i >= mid)
+	while (i < n1)
 	{
-		while (j <= higher)
-		{
-			sorted[k] = array[j];
-			j++;
-			k++;
-		}
+		array[k] = left[i];
+		i++;
+		k++;
 	}
-	else
+	while (j < n2)
 	{
-		while (i < mid )
-		{
-			sorted[k] = array[i];
-			i++;
-			k++;
-		}
+		array[k] = right[j];
+		j++;
+		k++;
 	}
-	free(sorted);
+	printf("[Done]: ");
+	print_array(array, higher - lower);
+
+	free(left);
+	free(right);
 }

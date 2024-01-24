@@ -66,10 +66,10 @@ void merge(int *array, size_t lower, size_t mid, size_t higher)
 		right[j] = array[mid + 1 + j];
 
 	printf("merging...\n[left]: ");
-	print_array(left, mid - lower);
+	print_array(left, n1);
 
 	printf("[right]: ");
-	print_array(right, higher - mid);
+	print_array(right, n2);
 
 	i = j = 0;
 	k = lower;
